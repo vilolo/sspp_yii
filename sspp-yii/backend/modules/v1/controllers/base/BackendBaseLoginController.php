@@ -4,7 +4,7 @@
 namespace backend\modules\v1\controllers\base;
 
 
-use backend\modules\v1\behavior\BaseHttpBearerAuth;
+use backend\modules\v1\behaviors\BaseHttpBearerAuth;
 use yii\helpers\ArrayHelper;
 
 class BackendBaseLoginController extends BackendBaseController

@@ -1,12 +1,12 @@
 <?php
 
-namespace api\modules\v1\controllers;
+namespace backend\modules\v1\controllers\base;
 
 use yii\base\Application;
-use yii\rest\ActiveController;
+use yii\web\Controller;
 
 
-class YiiPerformanceRecordController extends ActiveController {
+class YiiPerformanceRecordController extends Controller {
 
     private $timeRecord;
     private $actionName;

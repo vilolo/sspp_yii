@@ -20,6 +20,9 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        'response' => [
+            'format' => 'json'
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

@@ -2,12 +2,19 @@
 
 namespace backend\modules\v1\controllers\base;
 
-use api\modules\v1\controllers\YiiPerformanceRecordController;
+use yii\base\InvalidConfigException;
 use yii\filters\Cors;
 use yii\helpers\ArrayHelper;
 
 class BackendBaseController extends YiiPerformanceRecordController
 {
+    public $identity;
+
+    const LOGIN_TYPE_REDIS = 1;
+    const LOGIN_TYPE_SESSION = 2;
+
+    protected $loginType = self::LOGIN_TYPE_REDIS;
+
     public function behaviors()
     {
         $rulesArr = [

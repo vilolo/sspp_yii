@@ -3,11 +3,11 @@
 namespace backend\modules\v1\controllers;
 
 
-use backend\modules\v1\controllers\base\BackendBaseController;
+use backend\modules\v1\controllers\base\BackendBaseLoginController;
 
-class DemoController extends BackendBaseController
+class DemoController extends BackendBaseLoginController
 {
     public function actionIndex(){
-        echo 'okok';
+        return $this->identity['username'];
     }
 }
