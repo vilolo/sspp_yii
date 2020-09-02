@@ -1,8 +1,10 @@
 <?php
 namespace common\models;
 
+use backend\modules\v1\controllers\base\BackendBaseController;
+use common\constants\CacheKey;
+use common\utils\RedisUtil;
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -71,16 +73,22 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        Yii::$app->redis->set('aa', 'bb');
-        $r = Yii::$app->redis->get('aa');
-        echo $r;die();
-        if ($token == '888888'){
-            $user = User::instance();
-            $user->id = 1;
-            $user->username = 'admin';
-            return $user;
+        if (BackendBaseController::LOGIN_TYPE == BackendBaseController::LOGIN_TYPE_REDIS){
+            $redisUtil = new RedisUtil();
+            $userStr = $redisUtil->get(CacheKey::getAdminTokenKey($token));
+        }else{
+            $userStr = \Yii::$app->session->get('session');
         }
-        return null;
+
+        if(!empty($userStr)){
+            $user =  unserialize($userStr);
+            if(!empty($user)){
+                return $user;
+            }
+            return null;
+        }else{
+            return null;
+        }
         //throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 

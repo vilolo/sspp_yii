@@ -13,7 +13,18 @@ class BackendBaseController extends YiiPerformanceRecordController
     const LOGIN_TYPE_REDIS = 1;
     const LOGIN_TYPE_SESSION = 2;
 
-    protected $loginType = self::LOGIN_TYPE_REDIS;
+    const LOGIN_TYPE = self::LOGIN_TYPE_SESSION;
+
+    public function init()
+    {
+        try {
+            parent::init();
+        }
+        catch (InvalidConfigException $e) {
+            //yii规定resetful的controller必须设置$modelClass，处理忽略它
+        }
+        $this->enableCsrfValidation = false;
+    }
 
     public function behaviors()
     {
@@ -30,7 +41,7 @@ class BackendBaseController extends YiiPerformanceRecordController
             ],
         ];
 
-        ArrayHelper::merge(
+        return ArrayHelper::merge(
             parent::behaviors(), $rulesArr
         );
     }
