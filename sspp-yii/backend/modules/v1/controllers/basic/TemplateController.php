@@ -14,21 +14,6 @@ use yii\filters\VerbFilter;
  */
 class TemplateController extends BackendBaseController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     public function actionDesc()
     {
         $result = Template::find()->where(['type' => 1])->select(['name', 'content'])->asArray()->all();
