@@ -16,13 +16,13 @@ class TemplateController extends BackendBaseController
 {
     public function actionDesc()
     {
-        $result = Template::find()->where(['type' => 1])->select(['name', 'content'])->asArray()->all();
+        $result = Template::find()->where(['type' => 1])->select(['id', 'name', 'content'])->asArray()->all();
         return JsonUtil::success($result);
     }
 
     public function actionWord()
     {
-        $result = Template::find()->where(['type' => 2])->select(['name', 'content'])->asArray()->all();
+        $result = Template::find()->where(['type' => 2])->select(['id', 'name', 'content'])->asArray()->all();
         return JsonUtil::success($result);
     }
 
@@ -52,7 +52,6 @@ class TemplateController extends BackendBaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post(), '') && $model->save()) {
             return JsonUtil::success();
         }else{
