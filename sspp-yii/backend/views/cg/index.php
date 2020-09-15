@@ -9,6 +9,7 @@
         <div><button>导出excel</button></div>
         <table>
             <tr>
+                <th>ID</th>
                 <th>日期</th>
                 <th>产品型号</th>
                 <th>单价</th>
@@ -21,7 +22,8 @@
             </tr>
             <?php foreach ($list as $v):?>
             <tr>
-                <td><?= date('Y-m-d H:i:s', $v['created_at'])?></td>
+                <td><?= $v['id']?></td>
+                <td><?= $v['created_at']?></td>
                 <td><?= $v['goods_type']?></td>
                 <td><?= $v['price']?></td>
                 <td><?= $v['account']?></td>
@@ -29,10 +31,28 @@
                 <td><?= $v['mobile']?></td>
                 <td><?= $v['address']?></td>
                 <td><?= $v['remark']?></td>
-                <td><button>删除</button></td>
+                <td><button class="del" did="<?= $v['id']?>">删除</button></td>
             </tr>
             <?php endforeach;?>
         </table>
     </div>
 </body>
+<script src="/js/jquery.min.js"></script>
+<script>
+    $('.del').on('click', function () {
+        var id = $(this).attr('did');
+        $.ajax({
+            url:'/index.php/v1/basic/cg/del',
+            dataType:'json',
+            type:'post',
+            data:{id:id},
+            success:function (res) {
+                alert(res.message);
+                if (res.code == 200){
+                    window.location.reload()
+                }
+            }
+        })
+    })
+</script>
 </html>
