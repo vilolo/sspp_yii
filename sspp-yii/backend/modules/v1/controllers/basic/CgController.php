@@ -81,7 +81,7 @@ class CgController extends BackendBaseController
             $list[$k]['created_at'] = date('Y-m-d H:i:s', $v['created_at']);
         }
 
-        return (new ExcelUtil())->exportExcel("商品列表", $list, [
+        return (new ExcelUtil())->exportExcel("订单列表", $list, [
             'id' => '订单id',
             'goods_type' => '商品类型',
             'price' => '价格',

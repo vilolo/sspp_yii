@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-        <div><button>导出excel</button></div>
+        <div><button id="export">导出excel</button></div>
         <table>
             <tr>
                 <th>ID</th>
@@ -53,6 +53,9 @@
                 }
             }
         })
+    })
+    $('#export').on('click', function () {
+        window.location.href="/index.php/v1/basic/cg/export"
     })
 </script>
 </html>
