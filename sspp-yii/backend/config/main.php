@@ -21,6 +21,7 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'response' => [
+            //如果需要开启自定义错误，需要注释这个
             'format' => 'json'
         ],
         'user' => [
@@ -42,7 +43,11 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            //定义方法
+//            'errorAction' => 'site/error',
+
+            //定义错误处理类
+            'class' => 'common\exception\CommonHandler',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
