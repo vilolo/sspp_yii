@@ -16,7 +16,6 @@ class GoodsController extends BackendBaseController
 
     public function actionCollect()
     {
-        \Yii::$app->request->post('');
         $data = [
             'url' => \Yii::$app->request->post('url'),
             'img' => \Yii::$app->request->post('img'),
