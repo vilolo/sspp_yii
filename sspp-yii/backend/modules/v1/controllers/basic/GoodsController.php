@@ -24,7 +24,7 @@ class GoodsController extends BackendBaseController
             'statistics' => \Yii::$app->request->post('statistics'),
             'platform' => \Yii::$app->request->post('platform'),
         ];
-        $res = \Yii::$app->db2->createCommand()->insert('sign_log', $data)->execute();
+        $res = \Yii::$app->db->createCommand()->insert('sign_log', $data)->execute();
         return $res;
     }
 
