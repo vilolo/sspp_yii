@@ -22,6 +22,7 @@ class GoodsController extends BackendBaseController
             'name' => \Yii::$app->request->post('name'),
             'statistics' => \Yii::$app->request->post('statistics'),
             'platform' => \Yii::$app->request->post('platform'),
+            'json_item' => \Yii::$app->request->post('json_item'),
         ];
         $res = \Yii::$app->db->createCommand()->insert('sign_log', $data)->execute();
         return $res;
@@ -29,7 +30,8 @@ class GoodsController extends BackendBaseController
 
     public function actionShowLog()
     {
-        
+        $res = \Yii::$app->getDb()->createCommand()
+        return $res;
     }
 
     public function actionShowCollect()
