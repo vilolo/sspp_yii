@@ -41,6 +41,11 @@ class MarketController extends BackendBaseController
         if ($maxPrice > 0){
             $params .= '&price_min='.$minPrice;
         }
+		
+		$oversea = \Yii::$app->request->get('oversea');
+		if ($oversea){
+			$params .= '&locations='.$oversea;
+		}
 
         $itemBaseUrl = $urlList[\Yii::$app->request->get('store')]??'';
         if (!$itemBaseUrl){
