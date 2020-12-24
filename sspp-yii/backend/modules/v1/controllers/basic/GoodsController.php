@@ -35,17 +35,22 @@ class GoodsController extends BackendBaseController
 
     public function actionShowLog()
     {
-        $sql = 'select json_item from sign_log order by id desc';
+        $sql = 'select id, json_item from sign_log where status = 1 order by id desc';
         $res = \Yii::$app->db->createCommand($sql)->queryAll();
         $data = [];
         foreach ($res as $v){
-            $data[] = json_decode($v['json_item'], JSON_UNESCAPED_UNICODE);
+            $temp = json_decode($v['json_item'], JSON_UNESCAPED_UNICODE);
+            $temp['id'] = $v['id'];
+            $data[] = $temp;
         }
         return JsonUtil::success(['goodsList' => $data]);
     }
 
-    public function actionShowCollect()
+    public function actionCollectDel()
     {
-        
+        $id = \Yii::$app->request->post('id');
+        \Yii::$app->db->createCommand()->update('sign_log', ['status' => 0],"id=:id", [':id' => $id])
+            ->execute();
+        return JsonUtil::success();
     }
 }
